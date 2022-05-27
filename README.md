@@ -24,8 +24,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [https://github.com/Tuason066/Intro-Section-with-Dropdown-Navigation](https://github.com/Tuason066/Intro-Section-with-Dropdown-Navigation)
+- Live Site URL: [https://tuason066.github.io/Intro-Section-with-Dropdown-Navigation/](https://tuason066.github.io/Intro-Section-with-Dropdown-Navigation/)
 
 ### Built with
 
