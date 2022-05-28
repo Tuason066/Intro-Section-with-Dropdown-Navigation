@@ -1,32 +1,27 @@
-const dropdown = document.querySelectorAll('.dropdown');
-const asideDropdown = document.querySelectorAll('.aside-dropdown');
-const navbarToggle = document.querySelector('.logo__button');
-const aside = document.querySelector('.aside');
-const asideButton = document.querySelector('.aside__button');
+// <!-- THIS IS CODED BY: JEFFREY TUASON -->
 
-navbarToggle.addEventListener('click', () => {
-    aside.classList.add('slide-aside');
-});
+const dropdowns = document.querySelectorAll('.dropdown');
+const logoButton = document.querySelector('.logo__button');
+const navbarButton = document.querySelector('.navbar__button');
+const overlay = document.querySelector('.overlay');
+const navbar = document.querySelector('.navbar');
+logoButton.addEventListener('click', () => openNavbar());
+navbarButton.addEventListener('click', () => closeNavbar());
+navbarButton.addEventListener('touchstart', () => closeNavbar());
 
-asideButton.addEventListener('click', () => {
-    aside.classList.remove('slide-aside');
-});
-
-dropdown.forEach(item => {
-    // open dropdown
-    item.addEventListener('mousemove', () => {
-        openDropdown(item);
-    });
-
-    // close dropdown
-    item.addEventListener('mouseout', () => {
-        closeDropdown(item);
-    });
-
-    // toggle dropdown
+dropdowns.forEach(item => {
+    item.addEventListener('mouseover', () => openDropdown(item));
+    item.addEventListener('mouseout', () => closeDropdown(item));
     item.addEventListener('click', () => {
-        const showDropdown = item.classList.contains('show-list');
-
+        const showDropdown = item.classList.contains('show-dropdown');
+        if(!showDropdown) {
+            openDropdown(item);
+        } else {
+            closeDropdown(item);
+        };
+    });
+    item.addEventListener('touchstart', () => {
+        const showDropdown = item.classList.contains('show-dropdown');
         if(!showDropdown) {
             openDropdown(item);
         } else {
@@ -35,43 +30,65 @@ dropdown.forEach(item => {
     });
 });
 
-asideDropdown.forEach(item => {
-    // toggle dropdown
-    item.addEventListener('click', () => {
-        const showDropdown = item.classList.contains('show-aside-dropdown');
-
-        if(!showDropdown) {
-            openAsideDropdown(item);
-        } else {
-            closeAsideDropdown(item);
-        };
-    });
-});
-
-const openAsideDropdown = (item) => {
-    item.classList.add('show-aside-dropdown');
-    const dropdownContainer = item.querySelector('.aside-dropdown__container');
-    const dropdownList = item.querySelector('.aside-dropdown__list');
+const openDropdown = (dropdown) => {
+    dropdown.classList.add('show-dropdown');
+    const dropdownContainer = dropdown.querySelector('.dropdown__container');
+    const dropdownList = dropdown.querySelector('.dropdown__container ul');
     const dropdownListHeight = dropdownList.getBoundingClientRect().height;
     dropdownContainer.style.height = `${dropdownListHeight}px`;
 };
 
-const closeAsideDropdown = (item) => {
-    item.classList.remove('show-aside-dropdown');
-    const dropdownContainer = item.querySelector('.aside-dropdown__container');
+const closeDropdown = (dropdown) => {
+    dropdown.classList.remove('show-dropdown');
+    const dropdownContainer = dropdown.querySelector('.dropdown__container');
     dropdownContainer.style.height = 0;
 };
 
-const openDropdown = (item) => {
-    item.classList.add('show-list');
-    const dropdownContainer = item.querySelector('.dropdown__container');
-    const dropdownList = item.querySelector('.dropdown__list');
-    const dropdownListHeight = dropdownList.getBoundingClientRect().height;
-    dropdownContainer.style.height = `${dropdownListHeight}px`;
+const openNavbar = () => {
+    overlay.classList.add('show-overlay');
+    navbar.classList.add('show-navbar');
+};
+const closeNavbar = () => {
+    overlay.classList.remove('show-overlay');
+    navbar.classList.remove('show-navbar');
 };
 
-const closeDropdown = (item) => {
-    item.classList.remove('show-list');
-    const dropdownContainer = item.querySelector('.dropdown__container');
-    dropdownContainer.style.height = 0;
+// ************** SWIPE FUNCTION ************** 
+const swipe = (element) => {
+    let startX;
+    let startY;
+    let distance;
+    let minDistance = 100;
+    let minTime = 100;
+    let elapsedTime;
+    let startTime;
+
+    element.addEventListener('touchstart', e => {
+        const touchObj = e.changedTouches[0];
+
+        distance = 0;
+        startX = touchObj.pageX;
+        startY = touchObj.pageY;
+        startTime = new Date().getTime();
+        e.preventDefault();
+    }, false);
+
+    element.addEventListener('touchmove', e => {
+        e.preventDefault();
+    }, false);
+
+    element.addEventListener('touchend', e => {
+        const touchObj = e.changedTouches[0];
+        distance = touchObj.pageX - startX;
+        elapsedTime = new Date().getTime() - startTime;
+
+        const swipeRight = (elapsedTime >= minTime && distance >= minDistance && Math.abs(touchObj.pageY - startY) <= 100)
+        fingerSwipe(swipeRight);    
+        e.preventDefault()
+    }, false);
+
+    const fingerSwipe = (isRightSwipe) => {if (isRightSwipe) closeNavbar()};
 };
+
+swipe(overlay);
+swipe(navbar);

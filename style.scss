@@ -1,3 +1,5 @@
+// <!-- THIS IS CODED BY: JEFFREY TUASON -->
+
 // ************** VARIABLE STYLE ************** 
 $white: #fff;
 $almost-White: hsl(0, 0%, 98%);
@@ -11,10 +13,10 @@ $almost-Black: hsl(0, 0%, 8%);
     margin: 0;
     font-family: 'Epilogue', sans-serif;
 }
-/* 
+
 body {
     background-color: $almost-White;
-} */
+}
 
 picture {
     & > * {
@@ -22,140 +24,152 @@ picture {
     }
 }
 
-// ************** HEADER STYLE ************** 
-.header {
-    padding: 1rem 0;
-    display: flex;
-    align-items: center;
-    &__container {
-        display: block;
-        width: 100%;
-    }
+.btn {
+    background: none;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+// ************** OVERLAY STYLE ************** 
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #22222267;
+    z-index: 100;
+    
+    display: none;
+}
+
+.show-overlay {
+    display: block;
 }
 
 // ************** LOGO STYLE ************** 
+
 .logo {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    padding: 1rem 0;
     width: 90%;
     margin: 0 auto;
-    & a {
+    &__image {
         display: flex;
         align-items: center;
         justify-content: center;
     }
-    &__image {
-        max-width: 4rem;
-    }
-    &__button {
-        background-color: transparent;
-        outline: none;
-        border: none;
-        cursor: pointer;
-        & img {
-            max-width: 1rem;
-        }
+    &__button img{
+        width: 1rem;
     }
 }
 
 // ************** NAVBAR STYLE ************** 
 .navbar {
-    display: none;
+    z-index: 101;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    max-width: 450px;
+    height: 100%;
+    max-height: 100vh;
+    background-color: $white;
+    transition: all 0.4s ease;
+    &__container {
+        width: 90%;
+        margin: 0 auto;
+    }
     &__links {
+        display: flex;
+        align-items: center;
         text-decoration: none;
-        color: $medium-Gray;
-        background-color: transparent;
-        outline: none;
-        border: none;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        display: block;
 
+        font-size: .875rem;
+        color: $medium-Gray;
+        cursor: pointer;
         padding: .5em 1em;
-        border-radius: .5rem;
+        transition: all 0.2s ease;
+        & img {
+            width: 1rem;
+            margin-right: .5rem;
+        }
         &:hover {
             color: $almost-Black;
         }
     }
 }
 
-// ************** DROPDOWN STYLE ************** 
-.dropdown {
-    position: relative;
-    &__container {
-        position: absolute;
-        top: calc(100% + 1rem);
-        transition: all 0.4s ease;
-        padding: 1rem;
-        overflow: hidden;
-        background-color: $white;
-        border-radius: .5rem;
-        box-shadow: 0 0 1rem rgba(34, 34, 34, 0.2);
+.show-navbar {
+    right: 0;
+}
 
-        // hide dropdown item
-        height: 0;
-        padding: 0;
-    }
+// ************** NAVBAR HEADER STYLE ************** 
+.navbar__header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1.25rem .25rem;
+}
+
+.navbar__button img {
+    width: 1rem;
+}
+
+// ************** NAVBAR DROPDOWN STYLE ************** 
+.dropdown {
     &__button {
-        display: flex;
-        align-items: center;
+        padding: .5em 1em;
+        color: $medium-Gray;
+        &:hover {
+            color: $almost-Black;
+        }
     }
-    &__arrow {
-        margin-left: .4rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    &__arrow:last-child {
-        display: none;
+    &__chevron {
+        width: 1rem;
+        margin-left: .25rem;
+        &:last-child {
+            display: none;
+        }
     }
     & ul {
         list-style: none;
-
-
-        padding: 1rem;
-        border-radius: 3px;
-
+        margin-left: 1rem;
     }
-    & ul img {
-        width: 1rem;
-        margin-right: .5rem;
-    }
-    & a {
-        display: flex;
-        align-items: center;
-        padding: .5rem;
-        white-space: nowrap;
-    }
-    &__features {
-        right: 0;
-    }
-    &__company {
-        left: 0;
+    &__container {
+        transition: all 0.4s ease;
+        height: 0;
+        overflow: hidden;
     }
 }
 
-// show dropdown item
-.show-list {
-    & .dropdown {
-        &__arrow:first-child {
-            display: none !important;
-        }
-        &__arrow:last-child {
-            display: flex !important;
-        }
-    }
+.show-dropdown .dropdown__button {
+    color: $almost-Black;
 }
 
-// ************** ACCOUNT STYLE ************** 
-.account {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    &__register {
+// ************** NAVBAR MENU STYLE ************** 
+.menu__list {
+    list-style: none;
+}
+
+// ************** NAVBAR ACCOUNTS STYLE ************** 
+.accounts {
+    list-style: none;
+    text-align: center;
+    margin-top: 2rem;
+    &__links{
+        display: block;
+        border-radius: .5rem;
+    }
+    & li:last-child a {
         border: 2px solid $medium-Gray;
         &:hover {
             border-color: $almost-Black;
@@ -163,138 +177,106 @@ picture {
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 900px) {
+    // ************** OVERLAY STYLE ************** 
+    .overlay {
+        display: none;
+    }
 
     // ************** HEADER STYLE ************** 
     .header__container {
-        display: flex;
-        align-items: center;
-
-        padding: .5rem 0;
         width: 90%;
         margin: 0 auto;
+        position: relative;
+        display: flex;
+        align-items: center;
     }
-
+    
     // ************** LOGO STYLE ************** 
     .logo {
         width: auto;
         margin: 0;
+        padding: 2rem 0;
         &__image {
-            max-width: 100%;
+            margin-right: 4rem;
         }
         &__button {
             display: none;
         }
     }
-
+    
     // ************** NAVBAR STYLE ************** 
     .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        position: relative;
+        top: 0;
+        left: 0;
         width: 100%;
-
-        &__wrapper {
+        max-width: 100%;
+        background-color: transparent;
+        &__container {
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
             display: flex;
             align-items: center;
-            padding-left: 2rem;
+            justify-content: space-between;
+        }
+        &__header {
+            display: none;
+        }
+        &__links {
+            font-size: 1rem;
+            padding: .3em 1 em;
+            white-space: nowrap;
         }
     }
 
-}
-
-// ************** ASIDE STYLE ************** 
-.aside {
-    position: fixed;
-    top: 0;
-    left: 0;
-    transform: translateX(100%);
-    background-color: rgba(34, 34, 34, 0.5);
-    width: 100%;
-    min-height: 100vh;
-    transition: all 0.4s ease;
-    z-index: 999;
-    &__container {
-        width: 70%;
-        max-width: 450px;
-        min-height: 100vh;
-        background-color: $white;
-        margin-left: auto;
-        padding: 1rem;
-    }
-    &__header {
-        padding-bottom: 1rem;
+    .menu {
         display: flex;
-        justify-content: flex-end;
         align-items: center;
-    }
-    &__button img {
-        max-width: 1rem;
-    }
-    &-dropdown__container {
-        // hide dropdown
-        height: 0;
-        overflow: hidden;
-    }
-    &-dropdown__list {
-        list-style: none;
-        margin-left: 1rem;
-        & a {
+        &__list {
             display: flex;
             align-items: center;
+            & li {
+                margin: 0 .5rem;
+            }
         }
-        & img {
-            width: 1rem;
-            height: 1rem;
-            margin-right: .5rem;
+    }
+
+    // ************** DROPDOWN STYLE ************** 
+    .dropdown {
+        position: relative;
+        margin: .5em 1em;
+        &__container {
+            position: absolute;
+            top: calc(100% + 1.5rem);
+            box-shadow: 0 0 5px rgba(34, 34, 34, 0.3);
+            background-color: $white;
+            border-radius: .5rem;
+            & ul {
+                margin: 0;
+                padding: 1rem;
+            }
+        }
+        &__features {
+            right: 0;
+        }
+        &__company {
+            left: 0;
+        }
+        &__button {
             display: flex;
             align-items: center;
-            justify-content: center;
-
+            font-size: 1rem;
+            padding: 0;
         }
     }
-    &-dropdown__button {
+
+    // ************** ACCOUNTS STYLE ************** 
+    .accounts {
+        margin: 0;
         display: flex;
         align-items: center;
-        justify-content: center;
-    }
-    &-dropdown__arrow {
-        display: flex;
-        align-items: center;
-        margin-left: .5rem;
-    }
-    &-dropdown__arrow:last-child {
-        display: none;
-    }
-}
-
-.show-aside-dropdown {
-    & .aside-dropdown__arrow:last-child {
-        display: flex;
-    }
-    & .aside-dropdown__arrow:first-child {
-        display: none;
-    }
-}
-
-.aside-account {
-    text-align: center;
-    margin-top: 1rem;
-    &__register {
-        border: 2px solid $medium-Gray;
-        &:hover {
-            border-color: $almost-Black;
-        }
-    }
-}
-
-.slide-aside {
-    transform: translateX(0);
-}
-
-@media (min-width: 768px) {
-    .aside {
-        display: none;
     }
 }
 
@@ -321,6 +303,7 @@ picture {
         outline: none;
         color: $almost-White;
         border-radius: .5rem;
+        transition: all .4s ease;
     }
 }
 
@@ -330,6 +313,7 @@ picture {
     justify-content: space-between;
     align-items: center;
     padding-top: 2rem;
+    margin-top: 5rem;
     max-width: 450px;
     margin: 0 auto;
     &__image {
@@ -338,18 +322,16 @@ picture {
     }
 }
 
-@media (min-width: 768px) {
-
+@media (min-width: 900px) {
+    // ************** MAIN STYLE ************** 
     .main {
         display: flex;
         flex-direction: row-reverse;
-
-        // gap: 7rem;
-
         width: 80%;
         margin: 0 auto;
     }
 
+    // ************** ARTICLE STYLE ************** 
     .article {
         text-align: left;
         &__header {
@@ -373,11 +355,7 @@ picture {
         &__image {
             width: 5rem;
             padding: .5rem .25rem;
+            margin: 0 1rem;
         }
     }
-
-    .brands__image + .brands__image {
-        margin-left: 2rem;
-    }
-
 }
