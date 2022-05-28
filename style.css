@@ -51,7 +51,7 @@ picture > * {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 1rem 0;
+  padding: 1.25rem 0;
   width: 90%;
   margin: 0 auto;
 }
